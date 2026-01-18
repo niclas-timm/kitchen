@@ -14,9 +14,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem, type Kitchen } from '@/types';
+import { type BreadcrumbItem, type Kitchen, type KitchenInvitation } from '@/types';
 
-export default function KitchenEdit({ kitchen }: { kitchen: Kitchen }) {
+interface Props {
+    kitchen: Kitchen;
+    pendingInvitations: KitchenInvitation[];
+}
+
+export default function KitchenEdit({ kitchen, pendingInvitations }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Küchen',
@@ -40,6 +45,15 @@ export default function KitchenEdit({ kitchen }: { kitchen: Kitchen }) {
         ) {
             router.delete(`/kitchens/${kitchen.id}`);
         }
+    };
+
+    const handleDeleteInvitation = (invitationId: number) => {
+        router.delete(
+            KitchenInvitationController.destroy.url({
+                kitchen: kitchen.id,
+                invitation: invitationId,
+            })
+        );
     };
 
     return (
@@ -113,6 +127,44 @@ export default function KitchenEdit({ kitchen }: { kitchen: Kitchen }) {
                         </Card>
                     )}
                 </Form>
+
+                {pendingInvitations.length > 0 && (
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Ausstehende Einladungen</CardTitle>
+                            <CardDescription>
+                                Diese Einladungen wurden noch nicht angenommen.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <ul className="space-y-3">
+                                {pendingInvitations.map((invitation) => (
+                                    <li
+                                        key={invitation.id}
+                                        className="flex items-center justify-between rounded-lg border p-3"
+                                    >
+                                        <div>
+                                            <p className="font-medium">{invitation.email}</p>
+                                            <p className="text-muted-foreground text-sm">
+                                                Läuft ab am{' '}
+                                                {new Date(invitation.expires_at).toLocaleDateString(
+                                                    'de-DE'
+                                                )}
+                                            </p>
+                                        </div>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            onClick={() => handleDeleteInvitation(invitation.id)}
+                                        >
+                                            Zurückziehen
+                                        </Button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </CardContent>
+                    </Card>
+                )}
 
                 <Card className="border-destructive">
                     <CardHeader>

@@ -29,17 +29,11 @@ class KitchenInvitationController extends Controller
             ]);
         }
 
-        $pendingInvitation = $kitchen->invitations()
+        $kitchen->invitations()
             ->where('email', $email)
             ->whereNull('accepted_at')
             ->where('expires_at', '>', now())
-            ->first();
-
-        if ($pendingInvitation) {
-            return back()->withErrors([
-                'email' => 'An invitation has already been sent to this email address.',
-            ]);
-        }
+            ->delete();
 
         $invitation = KitchenInvitation::create([
             'kitchen_id' => $kitchen->id,

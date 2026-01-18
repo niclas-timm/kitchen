@@ -86,8 +86,15 @@ class KitchenController extends Controller
     {
         $this->authorize('update', $kitchen);
 
+        $pendingInvitations = $kitchen->invitations()
+            ->whereNull('accepted_at')
+            ->where('expires_at', '>', now())
+            ->latest()
+            ->get();
+
         return Inertia::render('kitchens/edit', [
             'kitchen' => $kitchen,
+            'pendingInvitations' => $pendingInvitations,
         ]);
     }
 
