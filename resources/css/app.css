@@ -1,0 +1,203 @@
+/**
+ * Kitchen Design System
+ * ---------------------
+ * Aesthetic: Warm & Cozy with Fresh Herb Greens
+ *
+ * Color Strategy:
+ * - Primary: Sage green (herb-inspired, fresh but muted)
+ * - Accent: Terracotta (warm, appetizing kitchen accent)
+ * - Neutrals: Warm stone (cream/beige biased, not gray)
+ *
+ * Typography:
+ * - Display: Fraunces (warm, friendly serif for headings)
+ * - Body: DM Sans (clean, geometric sans for readability)
+ *
+ * All colors use OKLCH for perceptual uniformity.
+ */
+
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@import 'tw-animate-css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@theme {
+    /* Typography - Font Families */
+    --font-sans:
+        'DM Sans', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    --font-display:
+        'Fraunces', 'Georgia', ui-serif, serif;
+
+    /* Border Radius - Soft, cozy corners */
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    /* Semantic Color Mappings */
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+
+    /* Extended Color Palette - Sage (Primary) */
+    --color-sage-50: oklch(0.98 0.01 145);
+    --color-sage-100: oklch(0.95 0.025 145);
+    --color-sage-200: oklch(0.90 0.04 145);
+    --color-sage-300: oklch(0.82 0.06 145);
+    --color-sage-400: oklch(0.72 0.08 145);
+    --color-sage-500: oklch(0.60 0.10 145);
+    --color-sage-600: oklch(0.52 0.10 145);
+    --color-sage-700: oklch(0.44 0.09 145);
+    --color-sage-800: oklch(0.36 0.07 145);
+    --color-sage-900: oklch(0.28 0.05 145);
+    --color-sage-950: oklch(0.20 0.03 145);
+
+    /* Extended Color Palette - Olive (Secondary Green) */
+    --color-olive-50: oklch(0.97 0.01 115);
+    --color-olive-100: oklch(0.93 0.02 115);
+    --color-olive-200: oklch(0.86 0.035 115);
+    --color-olive-300: oklch(0.76 0.05 115);
+    --color-olive-400: oklch(0.64 0.07 115);
+    --color-olive-500: oklch(0.52 0.08 115);
+    --color-olive-600: oklch(0.44 0.07 115);
+    --color-olive-700: oklch(0.36 0.06 115);
+    --color-olive-800: oklch(0.28 0.04 115);
+    --color-olive-900: oklch(0.22 0.03 115);
+
+    /* Extended Color Palette - Terracotta (Accent) */
+    --color-terracotta-50: oklch(0.97 0.02 45);
+    --color-terracotta-100: oklch(0.93 0.04 45);
+    --color-terracotta-200: oklch(0.86 0.08 45);
+    --color-terracotta-300: oklch(0.78 0.12 40);
+    --color-terracotta-400: oklch(0.70 0.14 38);
+    --color-terracotta-500: oklch(0.62 0.15 35);
+    --color-terracotta-600: oklch(0.54 0.14 33);
+    --color-terracotta-700: oklch(0.46 0.12 30);
+    --color-terracotta-800: oklch(0.38 0.09 28);
+    --color-terracotta-900: oklch(0.30 0.06 25);
+
+    /* Extended Color Palette - Stone (Warm Neutrals) */
+    --color-stone-50: oklch(0.985 0.005 85);
+    --color-stone-100: oklch(0.96 0.008 80);
+    --color-stone-200: oklch(0.92 0.01 75);
+    --color-stone-300: oklch(0.85 0.012 70);
+    --color-stone-400: oklch(0.70 0.015 65);
+    --color-stone-500: oklch(0.55 0.015 60);
+    --color-stone-600: oklch(0.45 0.012 55);
+    --color-stone-700: oklch(0.35 0.01 50);
+    --color-stone-800: oklch(0.25 0.008 45);
+    --color-stone-900: oklch(0.18 0.005 40);
+    --color-stone-950: oklch(0.12 0.003 35);
+}
+
+/* Light Mode - Warm & Cozy */
+:root {
+    /* Core backgrounds and text */
+    --background: oklch(0.985 0.005 85);
+    --foreground: oklch(0.25 0.008 45);
+
+    /* Cards - slightly warmer than background */
+    --card: oklch(0.995 0.003 80);
+    --card-foreground: oklch(0.25 0.008 45);
+
+    /* Popovers - crisp but warm */
+    --popover: oklch(0.995 0.003 80);
+    --popover-foreground: oklch(0.25 0.008 45);
+
+    /* Primary - Sage green for main actions */
+    --primary: oklch(0.52 0.10 145);
+    --primary-foreground: oklch(0.98 0.01 145);
+
+    /* Secondary - Warm stone for secondary elements */
+    --secondary: oklch(0.95 0.008 80);
+    --secondary-foreground: oklch(0.35 0.01 50);
+
+    /* Muted - Subtle backgrounds and disabled states */
+    --muted: oklch(0.96 0.008 80);
+    --muted-foreground: oklch(0.50 0.015 60);
+
+    /* Accent - Terracotta for highlights and CTAs */
+    --accent: oklch(0.95 0.03 45);
+    --accent-foreground: oklch(0.35 0.01 50);
+
+    /* Destructive - Warm red (fits the palette) */
+    --destructive: oklch(0.55 0.18 25);
+    --destructive-foreground: oklch(0.98 0.01 25);
+
+    /* Borders and inputs - warm and subtle */
+    --border: oklch(0.90 0.012 75);
+    --input: oklch(0.90 0.012 75);
+    --ring: oklch(0.60 0.10 145);
+
+    /* Chart colors - food/kitchen inspired */
+    --chart-1: oklch(0.60 0.10 145);
+    --chart-2: oklch(0.62 0.15 35);
+    --chart-3: oklch(0.52 0.08 115);
+    --chart-4: oklch(0.75 0.15 85);
+    --chart-5: oklch(0.55 0.18 25);
+
+    /* Border radius */
+    --radius: 0.625rem;
+
+    /* Sidebar - slightly different warm tone */
+    --sidebar: oklch(0.97 0.01 90);
+    --sidebar-foreground: oklch(0.25 0.008 45);
+    --sidebar-primary: oklch(0.52 0.10 145);
+    --sidebar-primary-foreground: oklch(0.98 0.01 145);
+    --sidebar-accent: oklch(0.93 0.015 85);
+    --sidebar-accent-foreground: oklch(0.35 0.01 50);
+    --sidebar-border: oklch(0.90 0.012 75);
+    --sidebar-ring: oklch(0.60 0.10 145);
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
